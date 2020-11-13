@@ -195,6 +195,12 @@ int main()
 			ldFindDistance(x);
 		}
 		swprintf_s(screen, 40, L"FPS=%3.2f ",  1.0f / fElapsedTime);
+		for (int nx = 0; nx < map.nWidth; nx++)
+			for (int ny = 0; ny < map.nWidth; ny++)
+			{
+				screen[(ny + 1) * screendata.nWidth + nx] = map.wslayout[ny * map.nWidth + nx];
+			}
+		screen[((int)player.fX + 1) * screendata.nWidth + (int)player.fY] = '|';
 		screen[screendata.nWidth * screendata.nHeight - 1] = '\0';
 		WriteConsoleOutputCharacter(hConsole, screen, screendata.nWidth * screendata.nHeight, { 0,0 }, &dwBytesWritten);
 	}
